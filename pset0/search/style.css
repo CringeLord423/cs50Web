@@ -1,0 +1,28 @@
+body > form, h1 {
+    text-align: center;
+}
+
+#links {
+    float: right;
+}
+
+#links > a {
+    margin: 10px;
+}
+
+h2 {
+    color: red;
+}
+
+table {
+    text-align: left;
+}
+
+#search {
+    border-radius: 25px;
+}
+
+#advSearchBut {
+    background-color: blue;
+    color: white;
+}
