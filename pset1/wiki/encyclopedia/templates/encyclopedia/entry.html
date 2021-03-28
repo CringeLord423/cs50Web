@@ -1,0 +1,9 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+	{{ title }} - Wikipedia
+{% endblock %}
+
+{% block body %}
+	{{ contents|safe }}
+{% endblock %}
