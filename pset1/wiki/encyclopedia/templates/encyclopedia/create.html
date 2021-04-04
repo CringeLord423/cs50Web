@@ -7,7 +7,9 @@
 {% block body %}
 	<form action="{% url 'create' %}" method="post">
 		{% csrf_token %}
-		{{ createForm }}
+		{{ createForm.title.label_tag }}&nbsp;&nbsp;&nbsp;&nbsp;{{ createForm.title }}<br>
+		{{ createForm.page.label_tag }}<br>
+		{{ createForm.page }}<br>
 		<input type="submit" value="Save">
 	</form>
 {% endblock %}

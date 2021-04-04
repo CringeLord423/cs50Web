@@ -44,7 +44,15 @@ def entry(request, title):
 
 def create(request):
     if request.method == "POST":
-        pass
+        form = CreateForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data["title"]
+            page = form.cleaned_data["page"]
+            if title in util.list_entries():
+                return HttpResponse("Page already exists")
+            util.save_entry(title, page)
+            return HttpResponseRedirect(reverse("index"))
+        
     return render(request, "encyclopedia/create.html", {
         "searchForm": SearchForm(),
         "createForm": CreateForm()
