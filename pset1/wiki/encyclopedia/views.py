@@ -6,12 +6,16 @@ from django import forms
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
-class NewTaskForm(forms.Form):
+class SearchForm(forms.Form):
 	title = forms.CharField(label="", widget=forms.TextInput(attrs={"class": "search", "placeholder": "Search Encyclopedia"}))
+
+class CreateForm(forms.Form):
+    title = forms.CharField(label="Title")
+    page = forms.CharField(label="Markdown", widget=forms.Textarea)
 
 def index(request):
     if request.method == "POST":
-        form = NewTaskForm(request.POST)
+        form = SearchForm(request.POST)
         if form.is_valid():
             title = form.cleaned_data["title"]
             newTitle = findMatching(title)
@@ -20,12 +24,12 @@ def index(request):
             return render(request, "encyclopedia/search.html", {
                 "title": title,
                 "entries": generateResults(title),
-                "form": NewTaskForm()
+                "searchForm": SearchForm()
             })
             
     return render(request, "encyclopedia/index.html", {
         "entries": util.list_entries(),
-        "form": NewTaskForm()
+        "form": SearchForm()
     })
 
 def entry(request, title):
@@ -35,7 +39,15 @@ def entry(request, title):
     return render(request, "encyclopedia/entry.html", {
         "title": title,
         "contents": markdown2.markdown(contents),
-        "form": NewTaskForm()
+        "searchForm": SearchForm()
+    })
+
+def create(request):
+    if request.method == "POST":
+        pass
+    return render(request, "encyclopedia/create.html", {
+        "searchForm": SearchForm(),
+        "createForm": CreateForm()
     })
 
 def findMatching(title):
