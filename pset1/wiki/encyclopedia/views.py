@@ -29,7 +29,7 @@ def index(request):
             
     return render(request, "encyclopedia/index.html", {
         "entries": util.list_entries(),
-        "form": SearchForm()
+        "searchForm": SearchForm()
     })
 
 def entry(request, title):
