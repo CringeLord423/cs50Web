@@ -33,12 +33,12 @@ def index(request):
     })
 
 def entry(request, title):
-    contents = util.get_entry(title)
-    if contents == None:
+    content = util.get_entry(title)
+    if content == None:
         return HttpResponse("Page not found")
     return render(request, "encyclopedia/entry.html", {
         "title": title,
-        "contents": markdown2.markdown(contents),
+        "content": markdown2.markdown(content),
         "searchForm": SearchForm()
     })
 
