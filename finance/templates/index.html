@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+    <table class="table table-striped">
+        <tr>
+            <th>Symbol</th>
+            <th>Name</th>
+            <th>Shares</th>
+            <th>Price</th>
+            <th>TOTAL</th>
+        </tr>
+        {% for row in owned %}
+            <tr>
+                {% for (key, value) in row.items() %}
+                    {% if key in ["price", "total"] %}
+                        <td>${{ "%.2f" % value }}</td>
+
+                    {% else %}
+                        <td>{{ value }}</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        <tr>
+            <td>CASH</td>
+            {% for i in range(3) %}
+                <td></td>
+            {% endfor %}
+            <td>${{ "%.2f" % balance }}</td>
+        </tr>
+        <tr>
+            {% for i in range(4) %}
+                <td></td>
+            {% endfor %}
+            <td>${{ "%.2f" % grandTotal }}</td>
+
+        </tr>
+    </table>
+
+{% endblock %}
