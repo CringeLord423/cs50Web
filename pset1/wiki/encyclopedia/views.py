@@ -58,6 +58,11 @@ def create(request):
         "createForm": CreateForm()
     })
 
+def edit(request):
+    return render(request, "encyclopedia/edit.html", {
+        "searchForm": SearchForm()
+    })
+
 def findMatching(title):
     for entry in util.list_entries():
         if title.upper() == entry.upper():
