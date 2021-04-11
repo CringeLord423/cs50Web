@@ -11,7 +11,7 @@ class SearchForm(forms.Form):
 
 class CreateForm(forms.Form):
     title = forms.CharField(label="Title")
-    page = forms.CharField(label="Markdown", widget=forms.Textarea)
+    content = forms.CharField(label="Markdown", widget=forms.Textarea)
 
 def index(request):
     if request.method == "POST":
@@ -47,10 +47,10 @@ def create(request):
         form = CreateForm(request.POST)
         if form.is_valid():
             title = form.cleaned_data["title"]
-            page = form.cleaned_data["page"]
+            content = form.cleaned_data["content"]
             if title in util.list_entries():
                 return HttpResponse("Page already exists")
-            util.save_entry(title, page)
+            util.save_entry(title, content)
             return HttpResponseRedirect(reverse("index"))
         
     return render(request, "encyclopedia/create.html", {

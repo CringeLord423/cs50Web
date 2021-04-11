@@ -8,8 +8,8 @@
 	<form action="{% url 'create' %}" method="post">
 		{% csrf_token %}
 		{{ createForm.title.label_tag }}&nbsp;&nbsp;&nbsp;&nbsp;{{ createForm.title }}<br>
-		{{ createForm.page.label_tag }}<br>
-		{{ createForm.page }}<br>
+		{{ createForm.content.label_tag }}<br>
+		{{ createForm.content }}<br>
 		<input type="submit" value="Save">
 	</form>
 {% endblock %}
